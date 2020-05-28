@@ -6,18 +6,31 @@
     <description>Recent content in Posts on McDul的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Tue, 26 May 2020 16:38:47 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2020 16:03:50 +0800</lastBuildDate>
     
 	<atom:link href="http://mcdul1996.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>博大吉</title>
+      <title>如何使用 Hugo 搭建个人博客</title>
+      <link>http://mcdul1996.github.io/posts/%E6%88%91%E7%9A%84%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Thu, 28 May 2020 16:03:50 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/%E6%88%91%E7%9A%84%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/</guid>
+      <description>1.下载 Hugo
+进入Hugo下载 在 Assets 中下载合适的版本， 例如：hugo_0.58.3_Windows-64bit.zip （找各自系统对应的版本下载） 解压到自定义文件夹（我的是解压到 D:\Software\hugo） 2.配置环境变量
+我的电脑—-&amp;gt;属性—-&amp;gt;高级系统设置—-&amp;gt;环境变量—-&amp;gt;系统变量—-&amp;gt; Path—-&amp;gt;新增 D:\Hugo 路径（根据 hugo.exe 的位置自行更换路径） 重启终端，运行hugo version 查看版本 3.利用 hugo 生成自己的博客 site
+推荐找个安全的目录打开命令行,我的目录是 D:\Software\McDul 复制执行下条命令: hugo new site [username].github.io-creator 会生成一个文件夹[username].github.io-creator 接着进入这个文件目录： cd [username].github.io-creator 创建 git 本地仓库： git init 下载 Ananke 博客主题： git submodule add https://github.com/budparr/gohugo-theme-ananke.gitthemes/ananke  在 config.toml 文件中将主题改成 Ananke： echo &amp;#39;theme=Ananke&amp;#39; &amp;gt;&amp;gt; config.toml 用 hugo 搭建了自己的博客已完成 4.开始建立第一篇博客
+新建文章： hugo new posts/第二篇博客.md 运行 code posts/第二篇博客.md 对文件进行编辑， 注意不要把文件原本的内容给删了，直接在后面另起一行写新内容， 修改好之后将 draft 后的 true 改成 false 表示已经不是草稿模式， 保存。 5.</description>
+    </item>
+    
+    <item>
+      <title>开博大吉</title>
       <link>http://mcdul1996.github.io/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/</link>
       <pubDate>Tue, 26 May 2020 16:38:47 +0800</pubDate>
       
       <guid>http://mcdul1996.github.io/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/</guid>
-      <description>大家好 我的博客了，希望我能写出好文章给大家看。</description>
+      <description>大家好 我的博客开通了，希望我能写出好文章给大家看。</description>
     </item>
     
   </channel>
