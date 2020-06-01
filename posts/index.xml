@@ -6,10 +6,19 @@
     <description>Recent content in Posts on McDul的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Thu, 28 May 2020 16:03:50 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2020 11:45:07 +0800</lastBuildDate>
     
 	<atom:link href="http://mcdul1996.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>关于我对maven和java包管理的理解</title>
+      <link>http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9maven%E5%92%8Cjava%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/</link>
+      <pubDate>Sat, 30 May 2020 11:45:07 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9maven%E5%92%8Cjava%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
+      <description>java的包管理 1. 什么是包  就是一个包含许多类的一个压缩包   </description>
+    </item>
     
     <item>
       <title>如何使用 Hugo 搭建个人博客</title>
