@@ -6,10 +6,22 @@
     <description>Recent content in Posts on McDul的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Tue, 02 Jun 2020 17:24:19 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2020 16:15:12 +0800</lastBuildDate>
     
 	<atom:link href="http://mcdul1996.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>关于我在Collection体系中学到的知识</title>
+      <link>http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8collection%E4%BD%93%E7%B3%BB%E4%B8%AD%E5%AD%A6%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Sat, 06 Jun 2020 16:15:12 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8collection%E4%BD%93%E7%B3%BB%E4%B8%AD%E5%AD%A6%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86/</guid>
+      <description>Collection体系的常用类及其背后的数据结构  List    ArrayList： 背后是一个动态数组，有序插入元素，可以根据下标取得对应元素，检索元素为线性查找，效率较低。当容量不足时会自动扩容，每次新建一个新的List，大小为原来的1.5倍，再将所有元素拷贝到新的List中去。
+  LinkedList： 背后是一个链表结构，有序插入元素，可以根据下标取得对应元素， 检索时从头部或者尾部不断向下标靠拢，所以头部和尾部的查找效率高，中间低。
+   Set   HashSet： 计算出元素的哈希值，哈希值相同的元素放在同一个哈希桶里，每个哈希桶里维护一个链表。插入的元素是无序的且不允许出现重复元素，查找效率高。但当发生哈希碰撞时，整个结构退化为链表会导致性能急剧下降。 LinkedHashSet： 不同于HashSet，前面的数据结构为链表，所以是有序的，其他几乎一样。 TreeSet： 前面的数据结构为二叉树，可以对插入的元素进行排序。检索快，时间复杂度降为对数级。   Map   HashMap： 实质上和HashSet一样，不过可以存储键（Key）到值（Value）的映射。JDK1.8之后当链表节点大于7时会裂变为红黑树。 TreeMap： 可以排序的HashMap。  ArrayList源码分析    ArrayList是最常用的一种集合类型  public class ArrayList&amp;lt;E&amp;gt; extends AbstractList&amp;lt;E&amp;gt; implements List&amp;lt;E&amp;gt;, RandomAccess, Cloneable, java.io.Serializable 表示ArrayList继承自AbstractList,实现了List接口、RandomAccess接口、Cloneable接口、Serializable接口。 说明它具备以下特点：
+ 浅拷贝 序列化   常量 private static final int DEFAULT_CAPACITY = 10;  DEFAULT_CAPACITY 表示默认的容量是10个元素   成员变量 transient Object[] elementData; private int size;  elementData为实际存储元素的数组，这里可以看到ArrayList的底层实际是一个数组。因此它具有数组的特点，随机读写快，插入删除慢。 transient关键字说明底层数组不能被序列化。   构造函数 public ArrayList() { this.</description>
+    </item>
     
     <item>
       <title>游戏题材</title>
