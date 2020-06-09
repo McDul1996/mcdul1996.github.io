@@ -6,10 +6,20 @@
     <description>Recent content in Posts on McDul的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Sun, 07 Jun 2020 07:55:48 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 10:17:44 +0800</lastBuildDate>
     
 	<atom:link href="http://mcdul1996.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>24 中级 - Java Web：HTTP基础课堂笔记</title>
+      <link>http://mcdul1996.github.io/posts/24/</link>
+      <pubDate>Tue, 09 Jun 2020 10:17:44 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/24/</guid>
+      <description>HTTP⼊⻔与详解 HTTP method 最重要的几种方法：
+ GET:请求指定的页面信息，并返回实体主体。 POST：向指定资源提交数据进行处理请求(例如提交表单或者上传文件)，数据被包含在请求中，POST请求可能会导致新的资源的建立和/或已有资源的修改。 PUT：从客户端服务器传送的数据取代指定的文档的内容。 DELETE：请求服务器删除指定的页面。 &amp;hellip;很多其他方法  关于如何反爬虫  Status 401/403 在返回的数据中投毒(故意返回错误的数据阴它)  HTTP status  1xx: 信息，服务器收到请求，需要请求者继续执行操作 2xx: 成功，操作被成功接收并处理 3xx: 重定向，需要进一步的操作以完成请求 4xx：客户端错误，请求包含语法错误或无法完成请求 5xx：服务器错误，服务器在处理请求的过程中发生了错误 Joke: 6xx ? http根本没有6xx,出了骂你们的后端，想不到其他解决方案 具体的可以看http.cat  HTTP请求header  重要的header  Host: 代表我要请求计算机网络上的哪台主机。 Accept*：浏览器(前端)告诉服务器(后端)：“我想要接收什么类型的数据”  Accept-Encoding:我想要的编码 Accept-language:我想要的语言   Cookie User-Agent： 代表了一个用户代理 Referer(正确的拼写referrer):浏览器用来告诉后端服务器当前的页面是从哪里跳转过来的  使用地方：防盗链系统      HTTP响应header  这个响应是根据请求来的， 重要的header  Content-type:告诉浏览器(前端)，当前的这个HTTP响应是什么类型的，应该如何被解析 典型的类型有：  text/plain :纯文本 image xml   Content-type与Accept这两个header可以让你的http请求更加的灵活： Http通道上跑的只是字节流，但是通过Content-type，服务器就能告诉浏览器，当前的这个字节流是什么类型的数据！浏览器就会按照这个类型来解析这个数据  application/zip(下载数据) image/jpeg(图片)   Set-Cookie    HTTP body  HTTP request body  表单 k-v对   HTTP response body：  当浏览器发送一个下载请求，服务器响应200 ok Content-type:zip&amp;hellip;后面跟的body就是要下载的内容，浏览器看到这个响应类型是ZIP的时候就懂了，直接将后面跟着的Body给下载下来</description>
+    </item>
     
     <item>
       <title>23-java web: web前后端架构分析实战</title>
@@ -23,6 +33,7 @@
   在网页上输入豆瓣网址的时候，按下回车 如果计算机不知道淘宝的主机在哪，它就会向DNS请求查询douban.com,DNS会返回一个地址154.8.131.172，按照这个地址，你就能够去跟豆瓣的主机通信了
   如果本地hosts恰好保存了从douban.com-&amp;gt;154.8.131.172的映射 我们就不需要查找DNS了，节省时间
     端⼝：
+  一台计算机有很多很多对外的端口，你可以指定与其中一个进行通信
   HTTPS协议的默认端⼝是443，HTTP协议的默认端⼝是80
   端口指定了你通信的这个主机上的一个归属地
     TCP协议(Transmission Control Protocol：传输控制协议)

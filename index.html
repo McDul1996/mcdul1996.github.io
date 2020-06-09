@@ -34,7 +34,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://mcdul1996.github.io/" />
-<meta property="og:updated_time" content="2020-06-07T07:55:48+08:00" />
+<meta property="og:updated_time" content="2020-06-09T10:17:44+08:00" />
 <meta itemprop="name" content="McDul的博客">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="McDul的博客"/>
@@ -122,6 +122,31 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="http://mcdul1996.github.io/posts/24/" class="color-inherit dim link">
+            24 中级 - Java Web：HTTP基础课堂笔记
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          HTTP⼊⻔与详解 HTTP method 最重要的几种方法：
+ GET:请求指定的页面信息，并返回实体主体。 POST：向指定资源提交数据进行处理请求(例如提交表单或者上传文件)，数据被包含在请求中，POST请求可能会导致新的资源的建立和/或已有资源的修改。 PUT：从客户端服务器传送的数据取代指定的文档的内容。 DELETE：请求服务器删除指定的页面。 &hellip;很多其他方法  关于如何反爬虫  Status 401/403 在返回的数据中投毒(故意返回错误的数据阴它)  HTTP status  1xx: 信息，服务器收到请求，需要请求者继续执行操作 2xx: 成功，操作被成功接收并处理 3xx: 重定向，需要进一步的操作以完成请求 4xx：客户端错误，请求包含语法错误或无法完成请求 5xx：服务器错误，服务器在处理请求的过程中发生了错误 Joke: 6xx ? http根本没有6xx,出了骂你们的后端，想不到其他解决方案 具体的可以看http.cat  HTTP请求header  重要的header  Host: 代表我要请求计算机网络上的哪台主机。 Accept*：浏览器(前端)告诉服务器(后端)：“我想要接收什么类型的数据”  Accept-Encoding:我想要的编码 Accept-language:我想要的语言   Cookie User-Agent： 代表了一个用户代理 Referer(正确的拼写referrer):浏览器用来告诉后端服务器当前的页面是从哪里跳转过来的  使用地方：防盗链系统      HTTP响应header  这个响应是根据请求来的， 重要的header  Content-type:告诉浏览器(前端)，当前的这个HTTP响应是什么类型的，应该如何被解析 典型的类型有：  text/plain :纯文本 image xml   Content-type与Accept这两个header可以让你的http请求更加的灵活： Http通道上跑的只是字节流，但是通过Content-type，服务器就能告诉浏览器，当前的这个字节流是什么类型的数据！浏览器就会按照这个类型来解析这个数据  application/zip(下载数据) image/jpeg(图片)   Set-Cookie    HTTP body  HTTP request body  表单 k-v对   HTTP response body：  当浏览器发送一个下载请求，服务器响应200 ok Content-type:zip&hellip;后面跟的body就是要下载的内容，浏览器看到这个响应类型是ZIP的时候就懂了，直接将后面跟着的Body给下载下来
+        </div>
+          <a href="http://mcdul1996.github.io/posts/24/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="http://mcdul1996.github.io/posts/%E7%AC%AC23%E8%8A%82%E8%AF%BE%E7%9A%84%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/" class="color-inherit dim link">
             23-java web: web前后端架构分析实战
             </a>
@@ -133,6 +158,7 @@
   在网页上输入豆瓣网址的时候，按下回车 如果计算机不知道淘宝的主机在哪，它就会向DNS请求查询douban.com,DNS会返回一个地址154.8.131.172，按照这个地址，你就能够去跟豆瓣的主机通信了
   如果本地hosts恰好保存了从douban.com-&gt;154.8.131.172的映射 我们就不需要查找DNS了，节省时间
     端⼝：
+  一台计算机有很多很多对外的端口，你可以指定与其中一个进行通信
   HTTPS协议的默认端⼝是443，HTTP协议的默认端⼝是80
   端口指定了你通信的这个主机上的一个归属地
     TCP协议(Transmission Control Protocol：传输控制协议)
@@ -175,36 +201,18 @@
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%A5%E5%90%8E%E6%83%B3%E8%A6%81%E5%81%9A%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E6%9D%90.md/%E6%B8%B8%E6%88%8F%E9%A2%98%E6%9D%90/" class="color-inherit dim link">
-            游戏题材
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          人生有好多细节,决定了你的成长速度
-        </div>
-          <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%A5%E5%90%8E%E6%83%B3%E8%A6%81%E5%81%9A%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E6%9D%90.md/%E6%B8%B8%E6%88%8F%E9%A2%98%E6%9D%90/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%A5%E5%90%8E%E6%83%B3%E8%A6%81%E5%81%9A%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E6%9D%90.md/%E6%B8%B8%E6%88%8F%E9%A2%98%E6%9D%90/" class="link black dim">
+              游戏题材
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9maven%E5%92%8Cjava%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/" class="link black dim">
