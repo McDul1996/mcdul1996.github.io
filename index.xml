@@ -6,10 +6,29 @@
     <description>Recent content on McDul的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Sat, 06 Jun 2020 16:15:12 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 07:55:48 +0800</lastBuildDate>
     
 	<atom:link href="http://mcdul1996.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>23-java web: web前后端架构分析实战</title>
+      <link>http://mcdul1996.github.io/posts/%E7%AC%AC23%E8%8A%82%E8%AF%BE%E7%9A%84%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 07 Jun 2020 07:55:48 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/%E7%AC%AC23%E8%8A%82%E8%AF%BE%E7%9A%84%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</guid>
+      <description>Web前后端基础架构原理 计算机⽹络是如何⼯作的(数据是如何发送和接收的)  在打开⽹⻚的时候发⽣了什么    计算机网络：
+ 世界上很多台主机彼此之间用网络连接起来，每个主机都有个IP地址    IP地址(Internet Protocol Address:网络协议)：
+ 在IPV4的世界里是32位，4个Byte(无符号，所以每个Byte最大不超过255)，用点连接起来的IP地址 每个地址都可以准确定位到一台主机 IPv6可以为地球上的每一粒沙子提供一个地址，可以解决IPV4带来的IP地址短缺问题    域名与DNS(域名解析服务器)
+  在网页上输入豆瓣网址的时候，按下回车 如果计算机不知道淘宝的主机在哪，它就会向DNS请求查询douban.com,DNS会返回一个地址154.8.131.172，按照这个地址，你就能够去跟豆瓣的主机通信了
+  如果本地hosts恰好保存了从douban.com-&amp;gt;154.8.131.172的映射 我们就不需要查找DNS了，节省时间
+    端⼝：
+  HTTPS协议的默认端⼝是443，HTTP协议的默认端⼝是80
+  端口指定了你通信的这个主机上的一个归属地
+    TCP协议(Transmission Control Protocol：传输控制协议)
+ TCP是基于流的协议,在⽹络上传输的只是字节流，这点非常关键！请记住！ TCP是一条双向的数据高速公路：向你想要访问的服务器所指定的端口开辟了一条双向双车道的一个数据高速公路 定义了字节流在网络上如何发送和接收    浏览器是如何⼯作的(数据是如何被浏览器处理的)   HTTP协议(HyperText Transfer Protocol:超文本传输协议)
+ 通过浏览器给豆瓣发送一个HTTP请求 请求报文的组成内容:  请求行: 请求方法 + URL + HTTP/版本号 请求头 空行 请求体   豆瓣服务器处理浏览器请求，将处理结果返回给浏览器(响应)：  响应头(Response Headers):HTTP/版本号 + 返回码 + 返回码描述  HTTP/1.</description>
+    </item>
     
     <item>
       <title>关于我在Collection体系中学到的知识</title>

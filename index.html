@@ -34,7 +34,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://mcdul1996.github.io/" />
-<meta property="og:updated_time" content="2020-06-06T16:15:12+08:00" />
+<meta property="og:updated_time" content="2020-06-07T07:55:48+08:00" />
 <meta itemprop="name" content="McDul的博客">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="McDul的博客"/>
@@ -122,6 +122,40 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="http://mcdul1996.github.io/posts/%E7%AC%AC23%E8%8A%82%E8%AF%BE%E7%9A%84%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/" class="color-inherit dim link">
+            23-java web: web前后端架构分析实战
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          Web前后端基础架构原理 计算机⽹络是如何⼯作的(数据是如何发送和接收的)  在打开⽹⻚的时候发⽣了什么    计算机网络：
+ 世界上很多台主机彼此之间用网络连接起来，每个主机都有个IP地址    IP地址(Internet Protocol Address:网络协议)：
+ 在IPV4的世界里是32位，4个Byte(无符号，所以每个Byte最大不超过255)，用点连接起来的IP地址 每个地址都可以准确定位到一台主机 IPv6可以为地球上的每一粒沙子提供一个地址，可以解决IPV4带来的IP地址短缺问题    域名与DNS(域名解析服务器)
+  在网页上输入豆瓣网址的时候，按下回车 如果计算机不知道淘宝的主机在哪，它就会向DNS请求查询douban.com,DNS会返回一个地址154.8.131.172，按照这个地址，你就能够去跟豆瓣的主机通信了
+  如果本地hosts恰好保存了从douban.com-&gt;154.8.131.172的映射 我们就不需要查找DNS了，节省时间
+    端⼝：
+  HTTPS协议的默认端⼝是443，HTTP协议的默认端⼝是80
+  端口指定了你通信的这个主机上的一个归属地
+    TCP协议(Transmission Control Protocol：传输控制协议)
+ TCP是基于流的协议,在⽹络上传输的只是字节流，这点非常关键！请记住！ TCP是一条双向的数据高速公路：向你想要访问的服务器所指定的端口开辟了一条双向双车道的一个数据高速公路 定义了字节流在网络上如何发送和接收    浏览器是如何⼯作的(数据是如何被浏览器处理的)   HTTP协议(HyperText Transfer Protocol:超文本传输协议)
+ 通过浏览器给豆瓣发送一个HTTP请求 请求报文的组成内容:  请求行: 请求方法 + URL + HTTP/版本号 请求头 空行 请求体   豆瓣服务器处理浏览器请求，将处理结果返回给浏览器(响应)：  响应头(Response Headers):HTTP/版本号 + 返回码 + 返回码描述  HTTP/1.
+        </div>
+          <a href="http://mcdul1996.github.io/posts/%E7%AC%AC23%E8%8A%82%E8%AF%BE%E7%9A%84%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8collection%E4%BD%93%E7%B3%BB%E4%B8%AD%E5%AD%A6%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86/" class="color-inherit dim link">
             关于我在Collection体系中学到的知识
             </a>
@@ -165,36 +199,18 @@
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9maven%E5%92%8Cjava%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/" class="color-inherit dim link">
-            关于我对maven和java包管理的理解
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          java的包管理 1. 什么是包  就是一个包含许多类的一个压缩包 这个包的作用是： 当JVM要找一个类的时候，它就会从classpath(类路径)里挨个一个个包里寻找这个类  2. 什么是包管理  包管理的本质就是告诉JVM如何找到所需要的第三方类库 并且可以解决其中的冲突问题(classpath里的某些包都含有同名不同版本的类，由于基本规则选择的那个优先的类里面的代码并不是你想要的，可能还存在BUG)  3. Maven是什么  Maven是划时代的包管理工具(必须强调Maven远远不止是包管理工具) Convention over configuration(约定优于配置) Maven有两个仓库 Maven的中央仓库：在远端的服务器上 包含了世界上所有的包(按照一定的约定存储包) Maven的本地仓库：默认位于~/.m2 你不可能每次编译的时候都把世界上所有的包下载下来，你可能想要在断网的时候进行编译 当你需要用包的时候，maven会帮你自动的从中央仓库下载，下载的第三方包放在这里进行缓存  4. Maven的包  按照约定为所有的包编号，⽅便检索 groupId/artifactId/version 扩展：语义化版本 SNAPSHOT快照版本： 因为maven有一个约定：当你这个包发布的时候，不允许你再去修改它，但是你在开发过程中需要频繁的修改它 传递性依赖：虽然你只下载了一个包，但maven会根据pom将这个包的完整的依赖树都下载下来 传递性依赖的⾃动管理 原则：绝对不允许最终的classpath出现同名不同版本的jar包 依赖冲突的解决原则：最近的胜出(但是很可能这个胜出的包里面的类的代码并不是你想要的，这个时候我们就需要根据自己的需要利用Maven使自己想要的包胜出) 方法1：既然是谁离得近谁赢，那就直接在我的项目里直接依赖我想要的版本的jar包 方法2：直接使用 排除那个胜出的版本的包  
-        </div>
-          <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9maven%E5%92%8Cjava%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9maven%E5%92%8Cjava%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/" class="link black dim">
+              关于我对maven和java包管理的理解
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="http://mcdul1996.github.io/posts/%E6%88%91%E7%9A%84%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="link black dim">
