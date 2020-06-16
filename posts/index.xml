@@ -6,10 +6,28 @@
     <description>Recent content in Posts on McDul的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Tue, 09 Jun 2020 10:17:44 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 16:37:11 +0800</lastBuildDate>
     
 	<atom:link href="http://mcdul1996.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>异常体系</title>
+      <link>http://mcdul1996.github.io/posts/26/</link>
+      <pubDate>Sun, 14 Jun 2020 16:37:11 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/26/</guid>
+      <description>异常体系 try/catch/finally  try:如果没有try，异常将击穿所有的栈帧  与下面任何一个配合使用,或者使用 try(&amp;ldquo;设置需要清理的东西) {} (只有实现了AutoCloseable接口的东西才可以用这种方法清理) catch可以将⼀个异常抓住  处理异常 在日志里打印异常 返回对应的对异常的处理   finally只执⾏清理⼯作，千万不要包含return;   JDK7+：try-with-resources(java7的语法塘，让代码简洁一点，仅此而已，可以根据Idea提示)  throw/throws  throw抛出⼀个异常，终止当前流程 throws只是⼀个声明，可有可无，有后面的引用这个方法的人来讲很烦  Java的异常体系  Throwable - 可以被抛出的东⻄（有毒）  Exception - checked execption（受检异常，有毒，代表 ⼀种预料之中的异常，IOException） *必须被显示声明，或者处理 RuntimeException - unchecked execption（运⾏时异常，⽆毒，代表⼀种预料 之外的异常，因此不需要声明） Error （错误，⽆毒）   catch的级联与合并  从小到大抓取异常    Throwable  栈轨迹 Stacktrace （排查问题最重要的信息，没有之⼀）  讲究方法  将一个checked execption包裹成了一个unchecked execption     异常链(Caused by)  知道这个异常的根本在哪里产生，被包裹的样子    异常的抛出原则  能⽤if/else处理的，不要使⽤try/catch  你可能会抓住一个不是你想要的异常：比如try里面方法调用后产生的异常 异常的创建非常的昂贵  因为异常的创建会把栈轨迹给填满，这样你才能拿到信息(异常链) 与if/else的时间周期差距可能是几千，几万倍！！     尽早抛出异常  如果不能处理，必须立刻抛出，不然可能会让这个问题变得更加复杂   异常要准确、带有详细信息  准确的表达这个异常正在发生的事情 尽可能多的带有详细的信息 一个写错的异常比没有异常更可怕，误导人   抛出异常也⽐悄悄地执⾏错误的逻辑强的多  异常的处理原则  本⽅法是否有责任处理这个异常？  不要处理不归⾃⼰管的异常   本⽅法是否有能⼒处理这个异常？  有能力处理：假如你是日志模块，丢了一个异常，你将这个异常抓住并且写到日志里 无能力处理：调用连接数据库，数据库抛了一个异常，一般是没有能力处理的 如果⾃⼰⽆法处理，就抛出 千万不能继续返回错误的结果   如⾮万分必要，不要忽略异常(抓住后吞掉)  除非在特定情况下：你非常确定与你参数有关的异常是绝对不会触发的，比如使用UTF-8去编码，肯定世界上所有的计算机平台都支持，绝对不会因为不支持触发这个异常，所以你只好把他吞掉    try { URLDecoder.</description>
+    </item>
+    
+    <item>
+      <title>File与IO</title>
+      <link>http://mcdul1996.github.io/posts/25/</link>
+      <pubDate>Wed, 10 Jun 2020 17:50:29 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/25/</guid>
+      <description>java的IO CPU：这个世界慢！死！了！ ⼀切⽂件的本质  ⼀段字节流： ⽂本⽂件（txt/代码/HTML等） ⼆进制⽂件 每个程序负责解释⽂件中的字节流  InputStream/OutputStream  抽象的输⼊/输出操作，⽆论是：  ⽂件写⼊字节流【实战】 从⽹络读取字节流【实战】 从其他什么破烂玩意读取字节流【实战】   谨记：  如果你不是对⽂件系统⼗分熟悉的话，请永远使⽤绝对路 径！！！！    Java中的File  不要误会！不要误会！不要误会！  File并不代表⼀个“⽂件”，它只代表⼀个“路径” 抽象的“⽂件”路径：⽂件或者⽂件夹   File的常⻅⽅法 绝对路径与相对路径 读/写⽂件 NIO （Java 7+）  New IO 新的IO Non-blocking IO ⾮阻塞IO   NIO的Path - 就是旧版本的File  IO太慢了，怎么办？  BufferedReader/Writer  换⾏符的故事   BufferedReader - ⼀次性读取好多东⻄到缓冲区⾥ BufferedWriter - ⼀次性写好多东⻄到缓冲区⾥ 在内存中创建好，⼀次写⼊  烦⼈的IOException  Java的异常体系简介  在return语句之外，为⽅法提供另外⼀种出⼝ IOException通常代表“预期之内的异常”   万能解决⽅案  Java中的NIO  Path与File 最常⽤的Files类 NIO简介  不需要重复发明轮⼦  需要任何IO的功能，尽管搜索，肯定有⼈把轮⼦造好了。  FileUtils IOUtils    try/catch/finally  如果没有try，异常将击穿所有的栈帧 catch可以将⼀个异常抓住 finally执⾏清理⼯作 JDK7+：try-with-resources  Java的异常体系  Throwable - 可以被抛出的东⻄  Exception - checked execption（受检异常）  RuntimeException （运⾏时异常）   Error （错误）    实战：将爬⾍数据保存⾄⽂件  CSV简介 读取/写⼊结构化数据  </description>
+    </item>
     
     <item>
       <title>24 中级 - Java Web：HTTP基础课堂笔记</title>
