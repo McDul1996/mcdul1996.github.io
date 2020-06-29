@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>数据库原理 | McDul的博客</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.71.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="数据库原理" />
+<meta property="og:description" content="数据库原理 Java过时了么？  没有！ 当之⽆愧的世界第⼀编程语⾔ 海量的需求 未来会过时么？  如果你想要把数据持久化，怎么办？  2B⻘年：拿笔抄！ 普通⻘年：写⽂件！  CSV=Comma Separated Value ⽂件 即逗号分隔符⽂件 ⽼板说，请把id⼤于100的数据筛选出来。 ⽼板说，请把数据和⽤户的信息都筛选出来 ⽼板说，能不能把这些数据和评论⼀起显示出来？   ⽂艺⻘年：写数据库！  普通⻘年的写⽂件  CSV⽂件 读写CSV⽂件  但是业务需求千变万化 所以&mdash;数据库横空出世  数据库提供结构化数据的持久化存储 索引保证数据查询的速度 事务的原⼦性保证数据不丢失  ATM1: 把钱给你 啪唧，ATM断电了。 ATM2：在你的账户上扣钱 事务(要么一件事情都不发生，要么都发生)    Docker⽅式安装⼀切数据库  百分百兼容 百分百⽆残留 百分百统⼀、⽅便 MySQL/PostgreSQL为例 H2数据库不需要安装 现在我们启动的数据库的数据是不持久化的  除⾮在启动容器的时候使⽤-v参数    数据库实战  Schema：设计⾃⼰的第⼀个数据库  数据库的类型与SQL语句  整数类型，例如int/bigint 字符串类型，例如varchar(100)/TEXT 时间类型，例如timestamp   ⾏与列 数据的外键   JDBC简介：Java Database Connection  本质就是：你给我⼀个连接字符串，我就能读取你的数据库的信息   H2简介 使⽤JDBC存取数据  DDL-SQL  create table 建表语句 drop table 删表语句 alter table 修改表  基本SQL  insert into - 增 delete from - 删 update - 改 select - 查 重要的要记住的知识：  SQL语句不区分⼤⼩写 命名⻛格是下划线分割两个单词 数据库中的字符串是单引号 数据库的注释是&ndash; 分号分割多个SQL语句    SELECT魔法  Select * Select count(*) count(1) Select max/min/avg Select limit 分⻚ select order by 排序 Select is null/is not null Select where id in ()  数据库的表设计原则  每个实体⼀张表（⽤户/商品）  每个实体都有⼀个主键ID 按照业务需要建索引   每个关系⽤⼀张表联系  关系型数据库    使⽤JDBC访问数据库  Java Database Connection  连接串 ⽤户名 密码   Statement PrepareStatement - 防SQL注⼊的 ResultSet  SQL注⼊与防范  什么是SQL注⼊  SQL注⼊是因为SQL没有验证传⼊的参数 导致攻击者可以通过精⼼设计的参数使得拼装出的SQL达 到他的⽬的   JDBC如何进⾏防范？  JOIN  什么是JOIN以及为什么需要JOIN INNER JOIN LEFT JOIN RIGHT JOIN  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://mcdul1996.github.io/posts/27/" />
+<meta property="article:published_time" content="2020-06-16T17:00:36+08:00" />
+<meta property="article:modified_time" content="2020-06-16T17:00:36+08:00" />
+<meta itemprop="name" content="数据库原理">
+<meta itemprop="description" content="数据库原理 Java过时了么？  没有！ 当之⽆愧的世界第⼀编程语⾔ 海量的需求 未来会过时么？  如果你想要把数据持久化，怎么办？  2B⻘年：拿笔抄！ 普通⻘年：写⽂件！  CSV=Comma Separated Value ⽂件 即逗号分隔符⽂件 ⽼板说，请把id⼤于100的数据筛选出来。 ⽼板说，请把数据和⽤户的信息都筛选出来 ⽼板说，能不能把这些数据和评论⼀起显示出来？   ⽂艺⻘年：写数据库！  普通⻘年的写⽂件  CSV⽂件 读写CSV⽂件  但是业务需求千变万化 所以&mdash;数据库横空出世  数据库提供结构化数据的持久化存储 索引保证数据查询的速度 事务的原⼦性保证数据不丢失  ATM1: 把钱给你 啪唧，ATM断电了。 ATM2：在你的账户上扣钱 事务(要么一件事情都不发生，要么都发生)    Docker⽅式安装⼀切数据库  百分百兼容 百分百⽆残留 百分百统⼀、⽅便 MySQL/PostgreSQL为例 H2数据库不需要安装 现在我们启动的数据库的数据是不持久化的  除⾮在启动容器的时候使⽤-v参数    数据库实战  Schema：设计⾃⼰的第⼀个数据库  数据库的类型与SQL语句  整数类型，例如int/bigint 字符串类型，例如varchar(100)/TEXT 时间类型，例如timestamp   ⾏与列 数据的外键   JDBC简介：Java Database Connection  本质就是：你给我⼀个连接字符串，我就能读取你的数据库的信息   H2简介 使⽤JDBC存取数据  DDL-SQL  create table 建表语句 drop table 删表语句 alter table 修改表  基本SQL  insert into - 增 delete from - 删 update - 改 select - 查 重要的要记住的知识：  SQL语句不区分⼤⼩写 命名⻛格是下划线分割两个单词 数据库中的字符串是单引号 数据库的注释是&ndash; 分号分割多个SQL语句    SELECT魔法  Select * Select count(*) count(1) Select max/min/avg Select limit 分⻚ select order by 排序 Select is null/is not null Select where id in ()  数据库的表设计原则  每个实体⼀张表（⽤户/商品）  每个实体都有⼀个主键ID 按照业务需要建索引   每个关系⽤⼀张表联系  关系型数据库    使⽤JDBC访问数据库  Java Database Connection  连接串 ⽤户名 密码   Statement PrepareStatement - 防SQL注⼊的 ResultSet  SQL注⼊与防范  什么是SQL注⼊  SQL注⼊是因为SQL没有验证传⼊的参数 导致攻击者可以通过精⼼设计的参数使得拼装出的SQL达 到他的⽬的   JDBC如何进⾏防范？  JOIN  什么是JOIN以及为什么需要JOIN INNER JOIN LEFT JOIN RIGHT JOIN  ">
+<meta itemprop="datePublished" content="2020-06-16T17:00:36&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-16T17:00:36&#43;08:00" />
+<meta itemprop="wordCount" content="141">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据库原理"/>
+<meta name="twitter:description" content="数据库原理 Java过时了么？  没有！ 当之⽆愧的世界第⼀编程语⾔ 海量的需求 未来会过时么？  如果你想要把数据持久化，怎么办？  2B⻘年：拿笔抄！ 普通⻘年：写⽂件！  CSV=Comma Separated Value ⽂件 即逗号分隔符⽂件 ⽼板说，请把id⼤于100的数据筛选出来。 ⽼板说，请把数据和⽤户的信息都筛选出来 ⽼板说，能不能把这些数据和评论⼀起显示出来？   ⽂艺⻘年：写数据库！  普通⻘年的写⽂件  CSV⽂件 读写CSV⽂件  但是业务需求千变万化 所以&mdash;数据库横空出世  数据库提供结构化数据的持久化存储 索引保证数据查询的速度 事务的原⼦性保证数据不丢失  ATM1: 把钱给你 啪唧，ATM断电了。 ATM2：在你的账户上扣钱 事务(要么一件事情都不发生，要么都发生)    Docker⽅式安装⼀切数据库  百分百兼容 百分百⽆残留 百分百统⼀、⽅便 MySQL/PostgreSQL为例 H2数据库不需要安装 现在我们启动的数据库的数据是不持久化的  除⾮在启动容器的时候使⽤-v参数    数据库实战  Schema：设计⾃⼰的第⼀个数据库  数据库的类型与SQL语句  整数类型，例如int/bigint 字符串类型，例如varchar(100)/TEXT 时间类型，例如timestamp   ⾏与列 数据的外键   JDBC简介：Java Database Connection  本质就是：你给我⼀个连接字符串，我就能读取你的数据库的信息   H2简介 使⽤JDBC存取数据  DDL-SQL  create table 建表语句 drop table 删表语句 alter table 修改表  基本SQL  insert into - 增 delete from - 删 update - 改 select - 查 重要的要记住的知识：  SQL语句不区分⼤⼩写 命名⻛格是下划线分割两个单词 数据库中的字符串是单引号 数据库的注释是&ndash; 分号分割多个SQL语句    SELECT魔法  Select * Select count(*) count(1) Select max/min/avg Select limit 分⻚ select order by 排序 Select is null/is not null Select where id in ()  数据库的表设计原则  每个实体⼀张表（⽤户/商品）  每个实体都有⼀个主键ID 按照业务需要建索引   每个关系⽤⼀张表联系  关系型数据库    使⽤JDBC访问数据库  Java Database Connection  连接串 ⽤户名 密码   Statement PrepareStatement - 防SQL注⼊的 ResultSet  SQL注⼊与防范  什么是SQL注⼊  SQL注⼊是因为SQL没有验证传⼊的参数 导致攻击者可以通过精⼼设计的参数使得拼装出的SQL达 到他的⽬的   JDBC如何进⾏防范？  JOIN  什么是JOIN以及为什么需要JOIN INNER JOIN LEFT JOIN RIGHT JOIN  "/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://mcdul1996.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      McDul的博客
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=http://mcdul1996.github.io/posts/27/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=http://mcdul1996.github.io/posts/27/&amp;text=%e6%95%b0%e6%8d%ae%e5%ba%93%e5%8e%9f%e7%90%86" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://mcdul1996.github.io/posts/27/&amp;title=%e6%95%b0%e6%8d%ae%e5%ba%93%e5%8e%9f%e7%90%86" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">数据库原理</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-06-16T17:00:36&#43;08:00">June 16, 2020</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="数据库原理">数据库原理</h1>
+<h2 id="java过时了么">Java过时了么？</h2>
+<ul>
+<li>没有！</li>
+<li>当之⽆愧的世界第⼀编程语⾔</li>
+<li>海量的需求</li>
+<li>未来会过时么？</li>
+</ul>
+<h2 id="如果你想要把数据持久化怎么办">如果你想要把数据持久化，怎么办？</h2>
+<ul>
+<li>2B⻘年：拿笔抄！</li>
+<li>普通⻘年：写⽂件！
+<ul>
+<li>CSV=Comma Separated Value ⽂件</li>
+<li>即逗号分隔符⽂件</li>
+<li>⽼板说，请把id⼤于100的数据筛选出来。</li>
+<li>⽼板说，请把数据和⽤户的信息都筛选出来</li>
+<li>⽼板说，能不能把这些数据和评论⼀起显示出来？</li>
+</ul>
+</li>
+<li>⽂艺⻘年：写数据库！</li>
+</ul>
+<h2 id="普通年的写件">普通⻘年的写⽂件</h2>
+<ul>
+<li>CSV⽂件</li>
+<li>读写CSV⽂件</li>
+</ul>
+<h2 id="但是业务需求千变万化">但是业务需求千变万化</h2>
+<h2 id="所以---数据库横空出世">所以&mdash;数据库横空出世</h2>
+<ul>
+<li>数据库提供结构化数据的持久化存储</li>
+<li>索引保证数据查询的速度</li>
+<li>事务的原⼦性保证数据不丢失
+<ul>
+<li>ATM1: 把钱给你</li>
+<li>啪唧，ATM断电了。</li>
+<li>ATM2：在你的账户上扣钱</li>
+<li>事务(要么一件事情都不发生，要么都发生)</li>
+</ul>
+</li>
+</ul>
+<h2 id="docker式安装切数据库">Docker⽅式安装⼀切数据库</h2>
+<ul>
+<li>百分百兼容</li>
+<li>百分百⽆残留</li>
+<li>百分百统⼀、⽅便</li>
+<li>MySQL/PostgreSQL为例</li>
+<li>H2数据库不需要安装</li>
+<li>现在我们启动的数据库的数据是不持久化的
+<ul>
+<li>除⾮在启动容器的时候使⽤-v参数</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库实战">数据库实战</h2>
+<ul>
+<li>Schema：设计⾃⼰的第⼀个数据库
+<ul>
+<li>数据库的类型与SQL语句
+<ul>
+<li>整数类型，例如int/bigint</li>
+<li>字符串类型，例如varchar(100)/TEXT</li>
+<li>时间类型，例如timestamp</li>
+</ul>
+</li>
+<li>⾏与列</li>
+<li>数据的外键</li>
+</ul>
+</li>
+<li>JDBC简介：Java Database Connection
+<ul>
+<li>本质就是：你给我⼀个连接字符串，我就能读取你的数据库的信息</li>
+</ul>
+</li>
+<li>H2简介</li>
+<li>使⽤JDBC存取数据</li>
+</ul>
+<h2 id="ddl-sql">DDL-SQL</h2>
+<ul>
+<li>create table 建表语句</li>
+<li>drop table 删表语句</li>
+<li>alter table 修改表</li>
+</ul>
+<h2 id="基本sql">基本SQL</h2>
+<ul>
+<li>insert into - 增</li>
+<li>delete from - 删</li>
+<li>update - 改</li>
+<li>select - 查</li>
+<li>重要的要记住的知识：
+<ul>
+<li>SQL语句不区分⼤⼩写</li>
+<li>命名⻛格是下划线分割两个单词</li>
+<li>数据库中的字符串是单引号</li>
+<li>数据库的注释是&ndash;</li>
+<li>分号分割多个SQL语句</li>
+</ul>
+</li>
+</ul>
+<h2 id="select魔法">SELECT魔法</h2>
+<ul>
+<li>Select *</li>
+<li>Select count(*) count(1)</li>
+<li>Select max/min/avg</li>
+<li>Select limit 分⻚</li>
+<li>select order by 排序</li>
+<li>Select is null/is not null</li>
+<li>Select where id in ()</li>
+</ul>
+<h2 id="数据库的表设计原则">数据库的表设计原则</h2>
+<ul>
+<li>每个实体⼀张表（⽤户/商品）
+<ul>
+<li>每个实体都有⼀个主键ID</li>
+<li>按照业务需要建索引</li>
+</ul>
+</li>
+<li>每个关系⽤⼀张表联系
+<ul>
+<li>关系型数据库</li>
+</ul>
+</li>
+</ul>
+<h2 id="使jdbc访问数据库">使⽤JDBC访问数据库</h2>
+<ul>
+<li>Java Database Connection
+<ul>
+<li>连接串</li>
+<li>⽤户名</li>
+<li>密码</li>
+</ul>
+</li>
+<li>Statement</li>
+<li>PrepareStatement - 防SQL注⼊的</li>
+<li>ResultSet</li>
+</ul>
+<h2 id="sql注与防范">SQL注⼊与防范</h2>
+<ul>
+<li>什么是SQL注⼊
+<ul>
+<li>SQL注⼊是因为SQL没有验证传⼊的参数</li>
+<li>导致攻击者可以通过精⼼设计的参数使得拼装出的SQL达
+到他的⽬的</li>
+</ul>
+</li>
+<li>JDBC如何进⾏防范？</li>
+</ul>
+<h2 id="join">JOIN</h2>
+<ul>
+<li>什么是JOIN以及为什么需要JOIN</li>
+<li>INNER JOIN</li>
+<li>LEFT JOIN</li>
+<li>RIGHT JOIN</li>
+</ul>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://mcdul1996.github.io/" >
+    &copy;  McDul的博客 2020 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

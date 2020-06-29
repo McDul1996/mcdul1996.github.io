@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>多线程与并发原理 | McDul的博客</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.71.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.1cb140d8ba31d5b2f1114537dd04802a.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="多线程与并发原理" />
+<meta property="og:description" content="多线程与并发原理 为什么需要多线程  CPU：你们都慢！死！了！（CPU实在是太快了，以至于想要尽可能的利用CPU的速度，不能光等待，可以做点其他事） 现代CPU都是多核的,多线程可以尽可能的实现出多核的价值  理论上具有天然并发的能力(1GHZ: 1G * cycle(时间周期)/秒 = 1*cycle/ns(纳秒)) 堆核心：又要快又可以避免发热量太大(Q=i²Rt)   Java的执⾏模型是同步/阻塞(block)的 默认情况下只有⼀个线程  处理问题⾮常⾃然 但是具有严重的性能问题    我能不能多请⼏个⼈来⼲活？  开启⼀个新的线程  Thread  Java中只有这么⼀种东⻄代表线程 start⽅法才能并发执⾏！ 每多开⼀个线程，就多⼀个执⾏流 ⽅法栈(局部变量)是线程私有的 静态变量/类变量是被所有线程共享的(伴随着的问题是几乎所有的坑都来自这里)      线程难的本质原因是 你要看着同⼀份代码， 想象不同的⼈在疯狂地以乱序执⾏它  难就难在共享变量的处理  演示多线程带来的性能提升  对于IO密集型应⽤极其有⽤  ⽹络IO（通常包括数据库）：处理完请求，发送给用户要经过网络IO，它很慢，等它的时间不如去做点其他事情（处理其他用户的请求） ⽂件IO   对于CPU密集型应⽤稍有折扣：不适合使用多线程，一个就基本够CPU受的了 性能提升的上限在哪⾥？  单核CPU 100% 多核CPU N*100%    昂贵的线程  能不能使⽤线程达到⽆穷⽆尽的性能提升?  ⼗个⼥⼈⼀个⽉能⽣⼀个孩⼦么？   线程的昂贵性在于  第⼀，CPU切换上下⽂很慢 第⼆，线程需要占⽤内存等系统资源   如果你的应⽤⼀天才⼏个⽤户  new Thread()." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://mcdul1996.github.io/posts/28/" />
+<meta property="article:published_time" content="2020-06-22T12:53:10+08:00" />
+<meta property="article:modified_time" content="2020-06-22T12:53:10+08:00" />
+<meta itemprop="name" content="多线程与并发原理">
+<meta itemprop="description" content="多线程与并发原理 为什么需要多线程  CPU：你们都慢！死！了！（CPU实在是太快了，以至于想要尽可能的利用CPU的速度，不能光等待，可以做点其他事） 现代CPU都是多核的,多线程可以尽可能的实现出多核的价值  理论上具有天然并发的能力(1GHZ: 1G * cycle(时间周期)/秒 = 1*cycle/ns(纳秒)) 堆核心：又要快又可以避免发热量太大(Q=i²Rt)   Java的执⾏模型是同步/阻塞(block)的 默认情况下只有⼀个线程  处理问题⾮常⾃然 但是具有严重的性能问题    我能不能多请⼏个⼈来⼲活？  开启⼀个新的线程  Thread  Java中只有这么⼀种东⻄代表线程 start⽅法才能并发执⾏！ 每多开⼀个线程，就多⼀个执⾏流 ⽅法栈(局部变量)是线程私有的 静态变量/类变量是被所有线程共享的(伴随着的问题是几乎所有的坑都来自这里)      线程难的本质原因是 你要看着同⼀份代码， 想象不同的⼈在疯狂地以乱序执⾏它  难就难在共享变量的处理  演示多线程带来的性能提升  对于IO密集型应⽤极其有⽤  ⽹络IO（通常包括数据库）：处理完请求，发送给用户要经过网络IO，它很慢，等它的时间不如去做点其他事情（处理其他用户的请求） ⽂件IO   对于CPU密集型应⽤稍有折扣：不适合使用多线程，一个就基本够CPU受的了 性能提升的上限在哪⾥？  单核CPU 100% 多核CPU N*100%    昂贵的线程  能不能使⽤线程达到⽆穷⽆尽的性能提升?  ⼗个⼥⼈⼀个⽉能⽣⼀个孩⼦么？   线程的昂贵性在于  第⼀，CPU切换上下⽂很慢 第⼆，线程需要占⽤内存等系统资源   如果你的应⽤⼀天才⼏个⽤户  new Thread().">
+<meta itemprop="datePublished" content="2020-06-22T12:53:10&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-22T12:53:10&#43;08:00" />
+<meta itemprop="wordCount" content="126">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="多线程与并发原理"/>
+<meta name="twitter:description" content="多线程与并发原理 为什么需要多线程  CPU：你们都慢！死！了！（CPU实在是太快了，以至于想要尽可能的利用CPU的速度，不能光等待，可以做点其他事） 现代CPU都是多核的,多线程可以尽可能的实现出多核的价值  理论上具有天然并发的能力(1GHZ: 1G * cycle(时间周期)/秒 = 1*cycle/ns(纳秒)) 堆核心：又要快又可以避免发热量太大(Q=i²Rt)   Java的执⾏模型是同步/阻塞(block)的 默认情况下只有⼀个线程  处理问题⾮常⾃然 但是具有严重的性能问题    我能不能多请⼏个⼈来⼲活？  开启⼀个新的线程  Thread  Java中只有这么⼀种东⻄代表线程 start⽅法才能并发执⾏！ 每多开⼀个线程，就多⼀个执⾏流 ⽅法栈(局部变量)是线程私有的 静态变量/类变量是被所有线程共享的(伴随着的问题是几乎所有的坑都来自这里)      线程难的本质原因是 你要看着同⼀份代码， 想象不同的⼈在疯狂地以乱序执⾏它  难就难在共享变量的处理  演示多线程带来的性能提升  对于IO密集型应⽤极其有⽤  ⽹络IO（通常包括数据库）：处理完请求，发送给用户要经过网络IO，它很慢，等它的时间不如去做点其他事情（处理其他用户的请求） ⽂件IO   对于CPU密集型应⽤稍有折扣：不适合使用多线程，一个就基本够CPU受的了 性能提升的上限在哪⾥？  单核CPU 100% 多核CPU N*100%    昂贵的线程  能不能使⽤线程达到⽆穷⽆尽的性能提升?  ⼗个⼥⼈⼀个⽉能⽣⼀个孩⼦么？   线程的昂贵性在于  第⼀，CPU切换上下⽂很慢 第⼆，线程需要占⽤内存等系统资源   如果你的应⽤⼀天才⼏个⽤户  new Thread()."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://mcdul1996.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      McDul的博客
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+  <div id="sharing" class="mt3">
+
+    
+    <a href="https://www.facebook.com/sharer.php?u=http://mcdul1996.github.io/posts/28/" class="facebook no-underline" aria-label="share on Facebook">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+    </a>
+
+    
+    
+    <a href="https://twitter.com/share?url=http://mcdul1996.github.io/posts/28/&amp;text=%e5%a4%9a%e7%ba%bf%e7%a8%8b%e4%b8%8e%e5%b9%b6%e5%8f%91%e5%8e%9f%e7%90%86" class="twitter no-underline" aria-label="share on Twitter">
+      <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/></svg>
+
+    </a>
+
+    
+    <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://mcdul1996.github.io/posts/28/&amp;title=%e5%a4%9a%e7%ba%bf%e7%a8%8b%e4%b8%8e%e5%b9%b6%e5%8f%91%e5%8e%9f%e7%90%86" class="linkedin no-underline" aria-label="share on LinkedIn">
+      <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+    </a>
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">多线程与并发原理</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-06-22T12:53:10&#43;08:00">June 22, 2020</time>
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="多线程与并发原理">多线程与并发原理</h1>
+<h2 id="为什么需要多线程">为什么需要多线程</h2>
+<ul>
+<li>CPU：你们都慢！死！了！（CPU实在是太快了，以至于想要尽可能的利用CPU的速度，不能光等待，可以做点其他事）</li>
+<li>现代CPU都是多核的,多线程可以尽可能的实现出多核的价值
+<ul>
+<li>理论上具有天然并发的能力(1GHZ: 1G * cycle(时间周期)/秒 = 1*cycle/ns(纳秒))</li>
+<li>堆核心：又要快又可以避免发热量太大(Q=i²Rt)</li>
+</ul>
+</li>
+<li>Java的执⾏模型是同步/阻塞(block)的</li>
+<li>默认情况下只有⼀个线程
+<ul>
+<li>处理问题⾮常⾃然</li>
+<li>但是具有严重的性能问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="我能不能多请个来活">我能不能多请⼏个⼈来⼲活？</h2>
+<ul>
+<li>开启⼀个新的线程
+<ul>
+<li>Thread
+<ul>
+<li>Java中只有这么⼀种东⻄代表线程</li>
+<li>start⽅法才能并发执⾏！</li>
+<li>每多开⼀个线程，就多⼀个执⾏流</li>
+<li>⽅法栈(局部变量)是线程私有的</li>
+<li>静态变量/类变量是被所有线程共享的(伴随着的问题是几乎所有的坑都来自这里)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="想象不同的在疯狂地以乱序执它">线程难的本质原因是
+你要看着同⼀份代码，
+想象不同的⼈在疯狂地以乱序执⾏它</h2>
+<ul>
+<li>难就难在共享变量的处理</li>
+</ul>
+<h2 id="演示多线程带来的性能提升">演示多线程带来的性能提升</h2>
+<ul>
+<li>对于IO密集型应⽤极其有⽤
+<ul>
+<li>⽹络IO（通常包括数据库）：处理完请求，发送给用户要经过网络IO，它很慢，等它的时间不如去做点其他事情（处理其他用户的请求）</li>
+<li>⽂件IO</li>
+</ul>
+</li>
+<li>对于CPU密集型应⽤稍有折扣：不适合使用多线程，一个就基本够CPU受的了</li>
+<li>性能提升的上限在哪⾥？
+<ul>
+<li>单核CPU 100%</li>
+<li>多核CPU N*100%</li>
+</ul>
+</li>
+</ul>
+<h2 id="昂贵的线程">昂贵的线程</h2>
+<ul>
+<li>能不能使⽤线程达到⽆穷⽆尽的性能提升?
+<ul>
+<li>⼗个⼥⼈⼀个⽉能⽣⼀个孩⼦么？</li>
+</ul>
+</li>
+<li>线程的昂贵性在于
+<ul>
+<li>第⼀，CPU切换上下⽂很慢</li>
+<li>第⼆，线程需要占⽤内存等系统资源</li>
+</ul>
+</li>
+<li>如果你的应⽤⼀天才⼏个⽤户
+<ul>
+<li>new Thread().start()</li>
+</ul>
+</li>
+<li>如果你的应⽤负载很⾼
+<ul>
+<li>使⽤线程池:JUC包</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程安全在多线程的环境下每当看到一个东西时都要先判断它是不是线程安全的进去搜索thread">线程安全(在多线程的环境下，每当看到一个东西时，都要先判断它是不是线程安全的(进去，搜索thread))</h2>
+<ul>
+<li>你享⽤了多线程的便利，就要付出代价
+<ul>
+<li>原⼦性：指一个不能中断的操作，要么完成，要么不开始</li>
+<li>共享变量</li>
+<li>默认的实现⼏乎都不是线程安全的</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程不安全的表现">线程不安全的表现</h2>
+<ul>
+<li>并发带来的数据错误
+<ul>
+<li>i++</li>
+<li>if-then-do ：通过访问共享变量而造成的不安全性</li>
+</ul>
+</li>
+<li>死锁</li>
+<li>著名的HashMap的死循环问题</li>
+<li>写⼀段代码来重现死锁</li>
+<li>预防死锁产⽣的原则：
+<ul>
+<li>所有的线程都按照相同的顺序获得资源的锁</li>
+</ul>
+</li>
+<li>死锁问题的排查</li>
+<li>多线程的经典问题：哲学家⽤餐</li>
+</ul>
+<h2 id="线程安全">线程安全</h2>
+<ul>
+<li>实现线程安全的基本⼿段
+<ul>
+<li>不可变类
+<ul>
+<li>Integer/String/&hellip;.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程安全-1">线程安全</h2>
+<ul>
+<li>实现线程安全的基本⼿段
+<ul>
+<li>JUC包
+<ul>
+<li>AtomicInteger/&hellip;</li>
+<li>ConcurrentHashMap
+<ul>
+<li>任何使⽤HashMap有线程安全问题的地⽅</li>
+<li>都⽆脑地使⽤ConcurrentHashMap替换即可。</li>
+</ul>
+</li>
+<li>ReentrantLock</li>
+<li>&hellip;</li>
+</ul>
+</li>
+<li>synchronized同步块</li>
+<li>同步块同步了什么东⻄？
+<ul>
+<li>synchronized(⼀个对象) 把这个对象当成锁</li>
+<li>Static synchronized⽅法 把Class对象当成锁</li>
+<li>实例的synchronnized⽅法把该实例当成锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Collections.synchronized</li>
+</ul>
+<h2 id="object类的线程法">Object类⾥的线程⽅法</h2>
+<ul>
+<li>线程的历史
+<ul>
+<li>Java从⼀开始就把线程作为语⾔特性，提供语⾔级的⽀持</li>
+</ul>
+</li>
+<li>为什么Java中的所有对象都可以成为锁？
+<ul>
+<li>Object.wait()/notify()/notifyAll()⽅法</li>
+<li>线程的状态与线程调度</li>
+<li>【扩展】为什么说Java的线程</li>
+</ul>
+</li>
+</ul>
+<h2 id="产者消费者模型">多线程的经典问题
+⽣产者/消费者模型</h2>
+<ul>
+<li>使⽤三种⽅法来解决它
+<ul>
+<li>wait/notify/notifyAll</li>
+<li>Lock/Condition</li>
+<li>BlockingQueue：需要2个 一个用来关联，一个用来控制协调这个关联</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程池与callablefuture">线程池与Callable/Future</h2>
+<ul>
+<li>什么是线程池
+<ul>
+<li>线程是昂贵的（Java线程模型的缺陷）
+<ul>
+<li>java的缺陷：java的线程是跟操作系统绑定的，所以线程的数量有上限</li>
+</ul>
+</li>
+<li>线程池是预先定义好的若⼲个线程
+<ul>
+<li>避免每次 创建/销毁线程所产生的开销</li>
+</ul>
+</li>
+<li>Java中的线程池</li>
+</ul>
+</li>
+<li>Callable/Future
+<ul>
+<li>类⽐Runnable，Callable可以返回值，抛出异常</li>
+<li>Future代表⼀个“未来才会返回的结果”</li>
+</ul>
+</li>
+<li>实战：多线程的WordCount
+<ul>
+<li>给定的N个文件和N个线程，创造一个线程池，里面的每个线程从分别读取文件的每一行，统计其中每个单词出现的次数</li>
+<li>思路：</li>
+<li>首先确定返回值需要满足需求：Map&lt;String, Integer&gt;</li>
+<li>因为是多线程中使用的Map,所以这里需要使用ConcurrentHashMap,所以创建一个名为filesResult的成员变量</li>
+<li>先提取一个文件, 根据这个文件.path创建一个名为reader的BufferedReader</li>
+<li>在这个基础上创建N个线程，for()</li>
+<li>给每个线程一份说明书来执行的任务，并且现在是多个循环，也是为了方便阅读，这里就创建一个外部类，</li>
+<li>这个外部类需要实现这些功能，最好的办法是实现一个接口，覆盖里面的方法，实现自己想要的功能，</li>
+<li>我想要的结果是：这个类可以将reader中的一行的统计结果添加到其中，所以我需要在外部类创建一个构造器，传递参数进去，</li>
+<li>我选择的接口是Runnable或者Callable,覆盖里面的方法，一个有返回值一个没有，反正都是用的共享变量</li>
+<li>最后直接返回这个共享变量就行了</li>
+</ul>
+</li>
+</ul>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://mcdul1996.github.io/" >
+    &copy;  McDul的博客 2020 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

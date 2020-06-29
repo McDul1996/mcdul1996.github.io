@@ -34,7 +34,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://mcdul1996.github.io/" />
-<meta property="og:updated_time" content="2020-06-14T16:37:11+08:00" />
+<meta property="og:updated_time" content="2020-06-22T12:53:10+08:00" />
 <meta itemprop="name" content="McDul的博客">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="McDul的博客"/>
@@ -122,6 +122,54 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="http://mcdul1996.github.io/posts/28/" class="color-inherit dim link">
+            多线程与并发原理
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          多线程与并发原理 为什么需要多线程  CPU：你们都慢！死！了！（CPU实在是太快了，以至于想要尽可能的利用CPU的速度，不能光等待，可以做点其他事） 现代CPU都是多核的,多线程可以尽可能的实现出多核的价值  理论上具有天然并发的能力(1GHZ: 1G * cycle(时间周期)/秒 = 1*cycle/ns(纳秒)) 堆核心：又要快又可以避免发热量太大(Q=i²Rt)   Java的执⾏模型是同步/阻塞(block)的 默认情况下只有⼀个线程  处理问题⾮常⾃然 但是具有严重的性能问题    我能不能多请⼏个⼈来⼲活？  开启⼀个新的线程  Thread  Java中只有这么⼀种东⻄代表线程 start⽅法才能并发执⾏！ 每多开⼀个线程，就多⼀个执⾏流 ⽅法栈(局部变量)是线程私有的 静态变量/类变量是被所有线程共享的(伴随着的问题是几乎所有的坑都来自这里)      线程难的本质原因是 你要看着同⼀份代码， 想象不同的⼈在疯狂地以乱序执⾏它  难就难在共享变量的处理  演示多线程带来的性能提升  对于IO密集型应⽤极其有⽤  ⽹络IO（通常包括数据库）：处理完请求，发送给用户要经过网络IO，它很慢，等它的时间不如去做点其他事情（处理其他用户的请求） ⽂件IO   对于CPU密集型应⽤稍有折扣：不适合使用多线程，一个就基本够CPU受的了 性能提升的上限在哪⾥？  单核CPU 100% 多核CPU N*100%    昂贵的线程  能不能使⽤线程达到⽆穷⽆尽的性能提升?  ⼗个⼥⼈⼀个⽉能⽣⼀个孩⼦么？   线程的昂贵性在于  第⼀，CPU切换上下⽂很慢 第⼆，线程需要占⽤内存等系统资源   如果你的应⽤⼀天才⼏个⽤户  new Thread().
+        </div>
+          <a href="http://mcdul1996.github.io/posts/28/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="http://mcdul1996.github.io/posts/27/" class="color-inherit dim link">
+            数据库原理
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          数据库原理 Java过时了么？  没有！ 当之⽆愧的世界第⼀编程语⾔ 海量的需求 未来会过时么？  如果你想要把数据持久化，怎么办？  2B⻘年：拿笔抄！ 普通⻘年：写⽂件！  CSV=Comma Separated Value ⽂件 即逗号分隔符⽂件 ⽼板说，请把id⼤于100的数据筛选出来。 ⽼板说，请把数据和⽤户的信息都筛选出来 ⽼板说，能不能把这些数据和评论⼀起显示出来？   ⽂艺⻘年：写数据库！  普通⻘年的写⽂件  CSV⽂件 读写CSV⽂件  但是业务需求千变万化 所以&mdash;数据库横空出世  数据库提供结构化数据的持久化存储 索引保证数据查询的速度 事务的原⼦性保证数据不丢失  ATM1: 把钱给你 啪唧，ATM断电了。 ATM2：在你的账户上扣钱 事务(要么一件事情都不发生，要么都发生)    Docker⽅式安装⼀切数据库  百分百兼容 百分百⽆残留 百分百统⼀、⽅便 MySQL/PostgreSQL为例 H2数据库不需要安装 现在我们启动的数据库的数据是不持久化的  除⾮在启动容器的时候使⽤-v参数    数据库实战  Schema：设计⾃⼰的第⼀个数据库  数据库的类型与SQL语句  整数类型，例如int/bigint 字符串类型，例如varchar(100)/TEXT 时间类型，例如timestamp   ⾏与列 数据的外键   JDBC简介：Java Database Connection  本质就是：你给我⼀个连接字符串，我就能读取你的数据库的信息   H2简介 使⽤JDBC存取数据  DDL-SQL  create table 建表语句 drop table 删表语句 alter table 修改表  基本SQL  insert into - 增 delete from - 删 update - 改 select - 查 重要的要记住的知识：  SQL语句不区分⼤⼩写 命名⻛格是下划线分割两个单词 数据库中的字符串是单引号 数据库的注释是&ndash; 分号分割多个SQL语句    SELECT魔法  Select * Select count(*) count(1) Select max/min/avg Select limit 分⻚ select order by 排序 Select is null/is not null Select where id in ()  数据库的表设计原则  每个实体⼀张表（⽤户/商品）  每个实体都有⼀个主键ID 按照业务需要建索引   每个关系⽤⼀张表联系  关系型数据库    使⽤JDBC访问数据库  Java Database Connection  连接串 ⽤户名 密码   Statement PrepareStatement - 防SQL注⼊的 ResultSet  SQL注⼊与防范  什么是SQL注⼊  SQL注⼊是因为SQL没有验证传⼊的参数 导致攻击者可以通过精⼼设计的参数使得拼装出的SQL达 到他的⽬的   JDBC如何进⾏防范？  JOIN  什么是JOIN以及为什么需要JOIN INNER JOIN LEFT JOIN RIGHT JOIN  
+        </div>
+          <a href="http://mcdul1996.github.io/posts/27/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="http://mcdul1996.github.io/posts/26/" class="color-inherit dim link">
             异常体系
             </a>
@@ -138,61 +186,24 @@
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="http://mcdul1996.github.io/posts/25/" class="color-inherit dim link">
-            File与IO
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          java的IO CPU：这个世界慢！死！了！ ⼀切⽂件的本质  ⼀段字节流： ⽂本⽂件（txt/代码/HTML等） ⼆进制⽂件 每个程序负责解释⽂件中的字节流  InputStream/OutputStream  抽象的输⼊/输出操作，⽆论是：  ⽂件写⼊字节流【实战】 从⽹络读取字节流【实战】 从其他什么破烂玩意读取字节流【实战】   谨记：  如果你不是对⽂件系统⼗分熟悉的话，请永远使⽤绝对路 径！！！！    Java中的File  不要误会！不要误会！不要误会！  File并不代表⼀个“⽂件”，它只代表⼀个“路径” 抽象的“⽂件”路径：⽂件或者⽂件夹   File的常⻅⽅法 绝对路径与相对路径 读/写⽂件 NIO （Java 7+）  New IO 新的IO Non-blocking IO ⾮阻塞IO   NIO的Path - 就是旧版本的File  IO太慢了，怎么办？  BufferedReader/Writer  换⾏符的故事   BufferedReader - ⼀次性读取好多东⻄到缓冲区⾥ BufferedWriter - ⼀次性写好多东⻄到缓冲区⾥ 在内存中创建好，⼀次写⼊  烦⼈的IOException  Java的异常体系简介  在return语句之外，为⽅法提供另外⼀种出⼝ IOException通常代表“预期之内的异常”   万能解决⽅案  Java中的NIO  Path与File 最常⽤的Files类 NIO简介  不需要重复发明轮⼦  需要任何IO的功能，尽管搜索，肯定有⼈把轮⼦造好了。  FileUtils IOUtils    try/catch/finally  如果没有try，异常将击穿所有的栈帧 catch可以将⼀个异常抓住 finally执⾏清理⼯作 JDK7+：try-with-resources  Java的异常体系  Throwable - 可以被抛出的东⻄  Exception - checked execption（受检异常）  RuntimeException （运⾏时异常）   Error （错误）    实战：将爬⾍数据保存⾄⽂件  CSV简介 读取/写⼊结构化数据  
-        </div>
-          <a href="http://mcdul1996.github.io/posts/25/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="http://mcdul1996.github.io/posts/24/" class="color-inherit dim link">
-            24 中级 - Java Web：HTTP基础课堂笔记
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          HTTP⼊⻔与详解 HTTP method 最重要的几种方法：
- GET:请求指定的页面信息，并返回实体主体。 POST：向指定资源提交数据进行处理请求(例如提交表单或者上传文件)，数据被包含在请求中，POST请求可能会导致新的资源的建立和/或已有资源的修改。 PUT：从客户端服务器传送的数据取代指定的文档的内容。 DELETE：请求服务器删除指定的页面。 &hellip;很多其他方法  关于如何反爬虫  Status 401/403 在返回的数据中投毒(故意返回错误的数据阴它)  HTTP status  1xx: 信息，服务器收到请求，需要请求者继续执行操作 2xx: 成功，操作被成功接收并处理 3xx: 重定向，需要进一步的操作以完成请求 4xx：客户端错误，请求包含语法错误或无法完成请求 5xx：服务器错误，服务器在处理请求的过程中发生了错误 Joke: 6xx ? http根本没有6xx,出了骂你们的后端，想不到其他解决方案 具体的可以看http.cat  HTTP请求header  重要的header  Host: 代表我要请求计算机网络上的哪台主机。 Accept*：浏览器(前端)告诉服务器(后端)：“我想要接收什么类型的数据”  Accept-Encoding:我想要的编码 Accept-language:我想要的语言   Cookie User-Agent： 代表了一个用户代理 Referer(正确的拼写referrer):浏览器用来告诉后端服务器当前的页面是从哪里跳转过来的  使用地方：防盗链系统      HTTP响应header  这个响应是根据请求来的， 重要的header  Content-type:告诉浏览器(前端)，当前的这个HTTP响应是什么类型的，应该如何被解析 典型的类型有：  text/plain :纯文本 image xml   Content-type与Accept这两个header可以让你的http请求更加的灵活： Http通道上跑的只是字节流，但是通过Content-type，服务器就能告诉浏览器，当前的这个字节流是什么类型的数据！浏览器就会按照这个类型来解析这个数据  application/zip(下载数据) image/jpeg(图片)   Set-Cookie    HTTP body  HTTP request body  表单 k-v对   HTTP response body：  当浏览器发送一个下载请求，服务器响应200 ok Content-type:zip&hellip;后面跟的body就是要下载的内容，浏览器看到这个响应类型是ZIP的时候就懂了，直接将后面跟着的Body给下载下来
-        </div>
-          <a href="http://mcdul1996.github.io/posts/24/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="http://mcdul1996.github.io/posts/25/" class="link black dim">
+              File与IO
+            </a>
+          </h2>
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="http://mcdul1996.github.io/posts/24/" class="link black dim">
+              24 中级 - Java Web：HTTP基础课堂笔记
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="http://mcdul1996.github.io/posts/%E7%AC%AC23%E8%8A%82%E8%AF%BE%E7%9A%84%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/" class="link black dim">
@@ -203,18 +214,6 @@
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%9C%A8collection%E4%BD%93%E7%B3%BB%E4%B8%AD%E5%AD%A6%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86/" class="link black dim">
               关于我在Collection体系中学到的知识
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E4%BB%A5%E5%90%8E%E6%83%B3%E8%A6%81%E5%81%9A%E7%9A%84%E4%B8%80%E4%B8%AA%E9%A2%98%E6%9D%90.md/%E6%B8%B8%E6%88%8F%E9%A2%98%E6%9D%90/" class="link black dim">
-              游戏题材
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="http://mcdul1996.github.io/posts/%E5%85%B3%E4%BA%8E%E6%88%91%E5%AF%B9maven%E5%92%8Cjava%E5%8C%85%E7%AE%A1%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/" class="link black dim">
-              关于我对maven和java包管理的理解
             </a>
           </h2>
         
