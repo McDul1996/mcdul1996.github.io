@@ -6,10 +6,48 @@
     <description>Recent content on McDul的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Mon, 22 Jun 2020 12:53:10 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2020 20:40:22 +0800</lastBuildDate>
     
 	<atom:link href="http://mcdul1996.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HTML常用标签</title>
+      <link>http://mcdul1996.github.io/posts/html/</link>
+      <pubDate>Wed, 05 Aug 2020 20:40:22 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/html/</guid>
+      <description>HTML 常用标签 a 标签的用法 跳转外部页面 跳转内部锚点 跳转到邮箱或电话等
+table 标签 用来写表格的
+img 标签 发出 GET 请求，展示一张图片</description>
+    </item>
+    
+    <item>
+      <title>MyBatis从⼊⻔到精通</title>
+      <link>http://mcdul1996.github.io/posts/39/</link>
+      <pubDate>Wed, 29 Jul 2020 11:19:39 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/39/</guid>
+      <description>MyBatis从⼊⻔到精通 MyBatis是什么  ⼀个ORM框架 国内基本上都在⽤ 简单、⽅便  Object Relationship Mapping  对象关系映射  ⾃动完成对象到数据库的映射   Association  ⾃动装配对象    从零开始MyBatis  看官⽅⽂档就够了 ⾸先配置⽇志框架，可以极⼤地提⾼排查问题的效率 然后配置数据源 Mapper：接⼝由MyBatis动态代理  优点：⽅便 缺点：SQL复杂的时候不够⽅便   Mapper：⽤XML编写复杂SQL  优点：可以⽅便地使⽤MyBatis的强⼤功能 缺点：SQL和代码分离    有关Mapper的⼀切  parameterType  参数的#{}和${} 参数是按照Java Bean约定读取的:getter/setter   resultType  typeAlias 写参数是按照Java Bean约定的:getter/setter   Association  动态SQL——MyBatis的灵魂  if choose foreach script  MyBatis的缓存  缓存是如何⼯作的？ MyBatis缓存源代码深⼊解读  Decorator模式    </description>
+    </item>
+    
+    <item>
+      <title>HashMap源码解读</title>
+      <link>http://mcdul1996.github.io/posts/hashmap%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
+      <pubDate>Sat, 18 Jul 2020 16:47:04 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/hashmap%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</guid>
+      <description>HashMap源码解读  为什么数组的长度一定要是2的N次方  只有这样，我们在对它进行-1操作的时候才能拿到全是1的值，可以非常快速的按照位运算的方式拿到数组的下标，并且桶的分布还是均匀的    java8HashMap的改进  数组+链表/红黑树 扩容时插入顺序的改进 函数方法  forEach compute系列   Mapde的新API  merge replace    </description>
+    </item>
+    
+    <item>
+      <title>算法与数据结构</title>
+      <link>http://mcdul1996.github.io/posts/31/</link>
+      <pubDate>Fri, 10 Jul 2020 10:53:33 +0800</pubDate>
+      
+      <guid>http://mcdul1996.github.io/posts/31/</guid>
+      <description>程序=算法+数据结构  算法：规定程序如何运行 数据结构：规定里面的数据如何存储  为什么我们需要算法和数据结构？  计算机世界的基⽯，是程序员的内功，所有语言通用 对代码效率的提升是本质的 ⾯试需要……  算法的复杂度  时间复杂度  O(1) - 哈希桶/数组随机寻址 （常数） O(n) - 遍历 （线性） O(log(n)) - ⼆分查找，⼆叉树 （对数） O(n*log(n)) - 基于⽐较的排序算法的下界 O(n^2) - 冒泡排序 （平⽅）   时间复杂度的计算是忽略常数的  即 O(n)=O(2n)   时间复杂度的计算中，⾼阶复杂度会吞并低阶复杂度  O(n^2)+O(n)=O(n^2)    基本数据结构 - 数组  随机寻址  常数时间   插⼊/删除  线性时间   查找  ⽆序：线性时间 有序：对数时间（⼆分查找）   【要求】⼿写⼆分查找  基本数据结构 - 链表  寻址  线性时间   插⼊/删除  常数时间   查找  线性时间   【要求】⼿写  翻转链表 判断链表是否成环    基本数据结构 - 栈 Stack  FILO （First In Last Out） 应⽤：⽅法栈 【要求】⼿写⼀个栈的实现  基本数据结构 - 队列 Queue  FIFO （First In First Out） 应⽤：线程池 【要求】⼿写⼀个队列的实现  基本数据结构 - 哈希表  查找/插⼊/删除操作都是 O(1) 哈希算法与碰撞 哈希桶的内部实现  基本数据结构 - ⼆叉树  ⼆叉树有两个孩⼦  相应的，多叉树有多个孩⼦   【要求】⼿写：  ⼆叉树的深度优先遍历 ⼆叉树的⼴度优先遍历    基本数据结构 - 搜索⼆叉树  ⼀棵经过精⼼设计的⼆叉树 可以将搜索效率降低到对数时间 致命缺点：可能会退化成链表  红⿊树    排序算法 - 综述  最基础的算法 基于⽐较的排序算法的复杂度下界是 O(nlog(n)) 排序的稳定性 Java 默认⽤什么排序算法？  排序算法 - 冒泡排序  最直观，最容易理解的排序算法 想象⼀下你是体育委员，要对班级同学排序 效率低，始终是 O(n^2) 【要求】能⼿写  排序算法 - 快速排序  每次将等待排序的数据划分成两部分 递归进⾏ 直到所有数据有序  排序算法 - 归并排序  分⽽治之  将⼀个⼤问题分解成⼩问题 解决⼩问题 递归地解决⼤问题   空间复杂度 O(n)  Q &amp;amp; A * * * * *</description>
+    </item>
     
     <item>
       <title>多线程与并发原理</title>
@@ -17,7 +55,7 @@
       <pubDate>Mon, 22 Jun 2020 12:53:10 +0800</pubDate>
       
       <guid>http://mcdul1996.github.io/posts/28/</guid>
-      <description>多线程与并发原理 为什么需要多线程  CPU：你们都慢！死！了！（CPU实在是太快了，以至于想要尽可能的利用CPU的速度，不能光等待，可以做点其他事） 现代CPU都是多核的,多线程可以尽可能的实现出多核的价值  理论上具有天然并发的能力(1GHZ: 1G * cycle(时间周期)/秒 = 1*cycle/ns(纳秒)) 堆核心：又要快又可以避免发热量太大(Q=i²Rt)   Java的执⾏模型是同步/阻塞(block)的 默认情况下只有⼀个线程  处理问题⾮常⾃然 但是具有严重的性能问题    我能不能多请⼏个⼈来⼲活？  开启⼀个新的线程  Thread  Java中只有这么⼀种东⻄代表线程 start⽅法才能并发执⾏！ 每多开⼀个线程，就多⼀个执⾏流 ⽅法栈(局部变量)是线程私有的 静态变量/类变量是被所有线程共享的(伴随着的问题是几乎所有的坑都来自这里)      线程难的本质原因是 你要看着同⼀份代码， 想象不同的⼈在疯狂地以乱序执⾏它  难就难在共享变量的处理  演示多线程带来的性能提升  对于IO密集型应⽤极其有⽤  ⽹络IO（通常包括数据库）：处理完请求，发送给用户要经过网络IO，它很慢，等它的时间不如去做点其他事情（处理其他用户的请求） ⽂件IO   对于CPU密集型应⽤稍有折扣：不适合使用多线程，一个就基本够CPU受的了 性能提升的上限在哪⾥？  单核CPU 100% 多核CPU N*100%    昂贵的线程  能不能使⽤线程达到⽆穷⽆尽的性能提升?  ⼗个⼥⼈⼀个⽉能⽣⼀个孩⼦么？   线程的昂贵性在于  第⼀，CPU切换上下⽂很慢 第⼆，线程需要占⽤内存等系统资源   如果你的应⽤⼀天才⼏个⽤户  new Thread().</description>
+      <description>多线程与并发原理 为什么需要多线程  CPU：你们都慢！死！了！（CPU实在是太快了，以至于想要尽可能的利用CPU的速度，不能光等待，可以做点其他事） 现代CPU都是多核的,多线程可以尽可能的实现出多核的价值  理论上具有天然并发的能力(1GHZ: 1G * cycle(时间周期)/秒 = 1*cycle/ns(纳秒)) 堆核心：又要快又可以避免发热量太大(Q=i²Rt)   Java的执⾏模型是同步/阻塞(block)的1个 默认情况下只有⼀个线程  处理问题⾮常⾃然 但是具有严重的性能问题    我能不能多请⼏个⼈来⼲活？  开启⼀个新的线程  Thread  Java中只有这么⼀种东⻄代表线程 start⽅法才能并发执⾏！ 每多开⼀个线程，就多⼀个执⾏流 ⽅法栈(局部变量)是线程私有的 静态变量/类变量是被所有线程共享的(伴随着的问题是几乎所有的坑都来自这里)      线程难的本质原因是 你要看着同⼀份代码， 想象不同的⼈在疯狂地以乱序执⾏它  难就难在共享变量的处理  演示多线程带来的性能提升  对于IO密集型应⽤极其有⽤  ⽹络IO（通常包括数据库）：处理完请求，发送给用户要经过网络IO，它很慢，等它的时间不如去做点其他事情（处理其他用户的请求） ⽂件IO   对于CPU密集型应⽤稍有折扣：不适合使用多线程，一个就基本够CPU受的了 性能提升的上限在哪⾥？  单核CPU 100% 多核CPU N*100%    昂贵的线程  能不能使⽤线程达到⽆穷⽆尽的性能提升?  ⼗个⼥⼈⼀个⽉能⽣⼀个孩⼦么？   线程的昂贵性在于  第⼀，CPU切换上下⽂很慢 第⼆，线程需要占⽤内存等系统资源   如果你的应⽤⼀天才⼏个⽤户  new Thread().</description>
     </item>
     
     <item>
